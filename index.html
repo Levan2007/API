@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Facts API integration</title>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+        <input type="text" id="count" />
+        <div id="factText"></div>
+        <button onclick="getFact()">Get Random Fact</button>
+      <div class="inputbox">
+        <script>
+            const factText = document.getElementById('factText');
+
+            function getFact() {
+                const limit = document.getElementById('count').value;
+                fetch(`https://api.api-ninjas.com/v1/facts?limit=${limit}`, {
+                    method: 'GET',
+                    headers: {
+                     'X-Api-Key': 'I8BkqjbVeYDVhOxAOd5iwQ==blPRgtGbPyRQ1Qpd'
+                    }
+                }).then(async(data) => {
+                    const result = await data.json();
+                    let html = ``;
+                    for (const item of result) {
+                        html = `${html}<p>${item.fact}</p>`;
+                    }
+                    factText.innerHTML = html;
+                })
+            }
+        </script>
+      </div>
+
+       
+    </body>
+</html>
